@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capas Base", "Capas Base", "{1578D9BC-34F7-40EC-B55F-47B6280A6805}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capas Superiores", "Capas Superiores", "{C60D3FBB-4926-4CC1-8DBD-7A3FB71D0A8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movimientos.COMMON", "Movimientos.COMMON\Movimientos.COMMON.csproj", "{A610DE79-8970-46F8-B620-D4582945176D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movimientos.API", "Movimientos.API\Movimientos.API.csproj", "{7CECDE01-A9B3-447F-B9B9-5EB92F87E828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movimientos.DAL.EFCore", "Movimientos.DAL.EFCore\Movimientos.DAL.EFCore.csproj", "{FA9F690D-DCAD-4029-AD1F-42748C3E7326}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A610DE79-8970-46F8-B620-D4582945176D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A610DE79-8970-46F8-B620-D4582945176D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A610DE79-8970-46F8-B620-D4582945176D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A610DE79-8970-46F8-B620-D4582945176D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CECDE01-A9B3-447F-B9B9-5EB92F87E828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CECDE01-A9B3-447F-B9B9-5EB92F87E828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CECDE01-A9B3-447F-B9B9-5EB92F87E828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CECDE01-A9B3-447F-B9B9-5EB92F87E828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA9F690D-DCAD-4029-AD1F-42748C3E7326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA9F690D-DCAD-4029-AD1F-42748C3E7326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA9F690D-DCAD-4029-AD1F-42748C3E7326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA9F690D-DCAD-4029-AD1F-42748C3E7326}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A610DE79-8970-46F8-B620-D4582945176D} = {1578D9BC-34F7-40EC-B55F-47B6280A6805}
+		{7CECDE01-A9B3-447F-B9B9-5EB92F87E828} = {C60D3FBB-4926-4CC1-8DBD-7A3FB71D0A8E}
+		{FA9F690D-DCAD-4029-AD1F-42748C3E7326} = {1578D9BC-34F7-40EC-B55F-47B6280A6805}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCADE55E-8D64-4779-A276-46153C8F74BA}
+	EndGlobalSection
+EndGlobal
