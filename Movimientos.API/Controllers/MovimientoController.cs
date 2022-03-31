@@ -39,7 +39,15 @@ namespace Movimientos.API.Controllers
             }
             catch (LimiteRetiroDiarioException lrdEx) 
             {
-                return BadRequest($"Limite diario superado. Actualmente has retirado {lrdEx.ValorTotalRetirado}, no puedes retirar el monto de {lrdEx.ValorRetirar}, debido a que el límite de retiro diario es S/ 1000.00");
+                return BadRequest($"Limite diario superado. Actualmente has retirado {lrdEx.ValorTotalRetirado}, no puedes retirar el monto de {lrdEx.ValorRetirar}, debido a que el límite de retiro diario es S/ 1000.00.");
+            }
+            catch(CuentaInexistenteException) 
+            {
+                return BadRequest("Cuenta asociada inexistente, por favor ingrese un Guid de cuenta existente.");
+            }
+            catch(SaldoInsuficienteException siEx)
+            {
+                return BadRequest("Saldo no disponible.");
             }
             catch (Exception)
             {

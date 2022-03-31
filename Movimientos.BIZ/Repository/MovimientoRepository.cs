@@ -20,11 +20,21 @@ public class MovimientoRepository : GenericRepository<Movimiento>, IMovimientoRe
     {
         entity.Id = Guid.NewGuid();
         var sumaRetiroDiario = await SumaRetiroDiario(entity.CuentaId);
-        if (sumaRetiroDiario + entity.Valor < -1000 )
-        {
+        if (sumaRetiroDiario + entity.Valor < -1000)
             throw new LimiteRetiroDiarioException(entity.Valor, sumaRetiroDiario);
-        }
 
+        var cuentaAsociada = await _context.Cuenta.FindAsync(entity.CuentaId);
+        if (cuentaAsociada is null)
+            throw new CuentaInexistenteException(entity.CuentaId);
+
+        if (cuentaAsociada.SaldoInicial < entity.Valor)
+            throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.SaldoInicial);
+        else 
+        {
+            cuentaAsociada.SaldoInicial = cuentaAsociada.SaldoInicial + entity.Valor;
+            _context.Cuenta.Attach(cuentaAsociada);
+        }
+            
         EntityEntry<Movimiento> createdResult = await _context.Movimiento.AddAsync(entity);
         await _context.SaveChangesAsync();
 
