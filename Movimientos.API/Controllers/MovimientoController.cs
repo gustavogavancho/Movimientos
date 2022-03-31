@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Movimientos.API.Models;
 using Movimientos.BIZ.Services.Interfaces;
 using Movimientos.COMMON.Exceptions;
 using Movimientos.COMMON.Models;
@@ -12,12 +14,15 @@ namespace Movimientos.API.Controllers
     {
         private readonly IMovimientoRepository _movimientoRepository;
         private readonly IMovimientoService _movimientoService;
+        private readonly IMapper _mapper;
 
         public MovimientoController(IMovimientoRepository movimientoRepository,
-            IMovimientoService movimientoService)
+            IMovimientoService movimientoService,
+            IMapper mapper)
         {
             _movimientoRepository = movimientoRepository;
             _movimientoService = movimientoService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -27,7 +32,7 @@ namespace Movimientos.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddMovimiento([FromBody] Movimiento movimiento)
+        public async Task<IActionResult> AddMovimiento([FromBody] MovimientoModel movimiento)
         {
             try
             {
@@ -37,7 +42,8 @@ namespace Movimientos.API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var createdMovimiento = await _movimientoService.CreateMovimiento(movimiento);
+                var _mappedMovimiento = _mapper.Map<Movimiento>(movimiento);
+                var createdMovimiento = await _movimientoService.CreateMovimiento(_mappedMovimiento);
 
                 return Created("movimiento", createdMovimiento);
             }
@@ -60,7 +66,7 @@ namespace Movimientos.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateMovimiento([FromBody] Movimiento movimiento)
+        public async Task<IActionResult> UpdateMovimiento([FromBody] MovimientoModel movimiento)
         {
             if (movimiento == null)
                 return BadRequest();
@@ -68,7 +74,8 @@ namespace Movimientos.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var movimientoToUpdate = await _movimientoRepository.Update(movimiento.Id, movimiento);
+            var _mappedMovimiento = _mapper.Map<Movimiento>(movimiento);
+            var movimientoToUpdate = await _movimientoRepository.Update(movimiento.Id, _mappedMovimiento);
 
             if (movimientoToUpdate == null)
                 return NotFound();

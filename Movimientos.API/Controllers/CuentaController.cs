@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Movimientos.API.Models;
 using Movimientos.COMMON.Models;
 using Movimientos.DAL.EFCore.Repository.Interfaces;
 
@@ -9,10 +11,13 @@ namespace Movimientos.API.Controllers
     public class CuentaController : ControllerBase
     {
         private readonly ICuentaRepository _cuentaRepository;
+        private readonly IMapper _mapper;
 
-        public CuentaController(ICuentaRepository cuentaRepository)
+        public CuentaController(ICuentaRepository cuentaRepository, 
+            IMapper mapper)
         {
             _cuentaRepository = cuentaRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -22,7 +27,7 @@ namespace Movimientos.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCuenta([FromBody] Cuenta cuenta)
+        public async Task<IActionResult> AddCuenta([FromBody] CuentaModel cuenta)
         {
             if (cuenta == null)
                 return BadRequest();
@@ -30,13 +35,14 @@ namespace Movimientos.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var createdCuenta = await _cuentaRepository.Create(cuenta);
+            var _mappedCuenta = _mapper.Map<Cuenta>(cuenta);
+            var createdCuenta = await _cuentaRepository.Create(_mappedCuenta);
 
             return Created("cuenta", createdCuenta);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCuenta([FromBody] Cuenta cuenta)
+        public async Task<IActionResult> UpdateCuenta([FromBody] CuentaModel cuenta)
         {
             if (cuenta == null)
                 return BadRequest();
@@ -44,7 +50,8 @@ namespace Movimientos.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var cuentaToUpdate = await _cuentaRepository.Update(cuenta.Id, cuenta);
+            var _mappedCuenta = _mapper.Map<Cuenta>(cuenta);
+            var cuentaToUpdate = await _cuentaRepository.Update(cuenta.Id, _mappedCuenta);
 
             if (cuentaToUpdate == null)
                 return NotFound();

@@ -3,12 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Movimientos.API.Models;
 
-public class ClienteModel
+public class ClienteModel : BaseEntityModel
 {
-    [Key]
-    public Guid Id { get; set; }
-    public DateTime FechaCreacion { get; set; }
-    public DateTime FechaModificacion { get; set; }
     public string Nombre { get; set; }
     public Genero Genero { get; set; }
     public short Edad { get; set; }

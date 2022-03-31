@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Movimientos.API.Profiles;
 using Movimientos.BIZ.Services;
 using Movimientos.BIZ.Services.Interfaces;
 using Movimientos.DAL.EFCore;
@@ -13,6 +14,7 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IMovimientoRepository, MovimientoRepository>();
 builder.Services.AddScoped<ICuentaRepository, CuentaRepository>();
 builder.Services.AddScoped<IMovimientoService, MovimientoService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
