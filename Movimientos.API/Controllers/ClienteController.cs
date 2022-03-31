@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Movimientos.API.Models;
 using Movimientos.COMMON.Models;
 using Movimientos.DAL.EFCore.Repository.Interfaces;
 
@@ -22,7 +23,7 @@ namespace Movimientos.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCliente([FromBody] Cliente cliente)
+        public async Task<IActionResult> AddCliente([FromBody] ClienteModel cliente)
         {
             if (cliente == null)
                 return BadRequest();
@@ -36,7 +37,7 @@ namespace Movimientos.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCliente([FromBody] Cliente cliente)
+        public async Task<IActionResult> UpdateCliente([FromBody] ClienteModel cliente)
         {
             if (cliente == null)
                 return BadRequest();
