@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Movimientos.COMMON\Movimientos.COMMON.csproj" />
     <ProjectReference Include="..\Movimientos.DAL.EFCore\Movimientos.DAL.EFCore.csproj" />
   </ItemGroup>

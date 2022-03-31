@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Movimientos.API.Models;
+using Movimientos.BIZ.Services.Interfaces;
 using Movimientos.COMMON.Models;
 using Movimientos.DAL.EFCore.Repository.Interfaces;
 
@@ -11,12 +12,15 @@ namespace Movimientos.API.Controllers
     public class ClienteController : Controller
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly IClienteService _clienteService;
         private readonly IMapper _mapper;
 
         public ClienteController(IClienteRepository clienteRepository,
+            IClienteService clienteService,
             IMapper mapper)
         {
             _clienteRepository = clienteRepository;
+            _clienteService = clienteService;
             _mapper = mapper;
         }
 
@@ -36,7 +40,7 @@ namespace Movimientos.API.Controllers
                 return BadRequest(ModelState);
 
             var _mappedCliente = _mapper.Map<Cliente>(cliente);
-            var createdCliente = await _clienteRepository.Create(_mappedCliente);
+            var createdCliente = await _clienteService.CreateCliente(_mappedCliente);
 
             return Created("cliente", createdCliente);
         }
