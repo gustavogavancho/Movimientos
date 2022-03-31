@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Movimientos.BIZ.Repository.Interfaces;
 using Movimientos.COMMON.Models;
+using Movimientos.DAL.EFCore.Repository.Interfaces;
 
 namespace Movimientos.API.Controllers
 {

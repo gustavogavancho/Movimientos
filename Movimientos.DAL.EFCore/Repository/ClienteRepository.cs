@@ -1,9 +1,7 @@
-﻿using Movimientos.BIZ.Repository.Interfaces;
-using Movimientos.COMMON.Models;
-using Movimientos.DAL.EFCore;
+﻿using Movimientos.COMMON.Models;
+using Movimientos.DAL.EFCore.Repository.Interfaces;
 
-namespace Movimientos.BIZ.Repository;
-
+namespace Movimientos.DAL.EFCore.Repository;
 public class ClienteRepository : GenericRepository<Cliente>, IClienteRepository
 {
     public ClienteRepository(MovimientosDbContext context) : base(context) {}

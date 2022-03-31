@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Movimientos.BIZ.Repository.Interfaces;
 using Movimientos.COMMON.Models;
-using Movimientos.DAL.EFCore;
+using Movimientos.DAL.EFCore.Repository.Interfaces;
 
-namespace Movimientos.BIZ.Repository;
+namespace Movimientos.DAL.EFCore.Repository;
 
 public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
 {
@@ -13,6 +12,14 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
     public GenericRepository(MovimientosDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<TEntity> Attach(TEntity entity)
+    {
+        _context.Set<TEntity>().Attach(entity);
+        await _context.SaveChangesAsync();
+
+        return entity;
     }
 
     public async Task<TEntity> Create(TEntity entity)

@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Movimientos.BIZ.Repository;
-using Movimientos.BIZ.Repository.Interfaces;
+using Movimientos.BIZ.Services;
+using Movimientos.BIZ.Services.Interfaces;
 using Movimientos.DAL.EFCore;
+using Movimientos.DAL.EFCore.Repository;
+using Movimientos.DAL.EFCore.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<MovimientosDbContext>(options => options.UseSqlSer
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IMovimientoRepository, MovimientoRepository>();
 builder.Services.AddScoped<ICuentaRepository, CuentaRepository>();
+builder.Services.AddScoped<IMovimientoService, MovimientoService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

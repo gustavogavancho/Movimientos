@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Movimientos.BIZ.Repository.Interfaces;
+using Movimientos.BIZ.Services.Interfaces;
 using Movimientos.COMMON.Exceptions;
 using Movimientos.COMMON.Models;
+using Movimientos.DAL.EFCore.Repository.Interfaces;
 
 namespace Movimientos.API.Controllers
 {
@@ -10,10 +11,13 @@ namespace Movimientos.API.Controllers
     public class MovimientoController : ControllerBase
     {
         private readonly IMovimientoRepository _movimientoRepository;
+        private readonly IMovimientoService _movimientoService;
 
-        public MovimientoController(IMovimientoRepository movimientoRepository)
+        public MovimientoController(IMovimientoRepository movimientoRepository,
+            IMovimientoService movimientoService)
         {
             _movimientoRepository = movimientoRepository;
+            _movimientoService = movimientoService;
         }
 
         [HttpGet]
@@ -33,7 +37,7 @@ namespace Movimientos.API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var createdMovimiento = await _movimientoRepository.CreateMovimiento(movimiento);
+                var createdMovimiento = await _movimientoService.CreateMovimiento(movimiento);
 
                 return Created("movimiento", createdMovimiento);
             }
