@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movimientos.API", "Movimien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movimientos.DAL.EFCore", "Movimientos.DAL.EFCore\Movimientos.DAL.EFCore.csproj", "{FA9F690D-DCAD-4029-AD1F-42748C3E7326}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movimientos.BIZ", "Movimientos.BIZ\Movimientos.BIZ.csproj", "{F8F34A77-ACBF-4FF3-8EB4-71C33A4D14A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{FA9F690D-DCAD-4029-AD1F-42748C3E7326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA9F690D-DCAD-4029-AD1F-42748C3E7326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA9F690D-DCAD-4029-AD1F-42748C3E7326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F34A77-ACBF-4FF3-8EB4-71C33A4D14A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F34A77-ACBF-4FF3-8EB4-71C33A4D14A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F34A77-ACBF-4FF3-8EB4-71C33A4D14A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F34A77-ACBF-4FF3-8EB4-71C33A4D14A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{A610DE79-8970-46F8-B620-D4582945176D} = {1578D9BC-34F7-40EC-B55F-47B6280A6805}
 		{7CECDE01-A9B3-447F-B9B9-5EB92F87E828} = {C60D3FBB-4926-4CC1-8DBD-7A3FB71D0A8E}
 		{FA9F690D-DCAD-4029-AD1F-42748C3E7326} = {1578D9BC-34F7-40EC-B55F-47B6280A6805}
+		{F8F34A77-ACBF-4FF3-8EB4-71C33A4D14A2} = {1578D9BC-34F7-40EC-B55F-47B6280A6805}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BCADE55E-8D64-4779-A276-46153C8F74BA}
