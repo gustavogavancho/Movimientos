@@ -1,5 +1,5 @@
-﻿namespace Movimientos.BIZ.Repository.Interfaces;
+﻿using Movimientos.COMMON.Models;
 
-public interface ICuentaRepository
-{
-}
+namespace Movimientos.BIZ.Repository.Interfaces;
+
+public interface ICuentaRepository : IGenericRepository<Cuenta> {}

@@ -2,6 +2,4 @@
 
 namespace Movimientos.BIZ.Repository.Interfaces;
 
-public interface IClienteRepository : IGenericRepository<Cliente>
-{
-}
+public interface IClienteRepository : IGenericRepository<Cliente> {}

@@ -4,8 +4,8 @@ using Movimientos.COMMON.Models;
 
 namespace Movimientos.API.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [ApiController]
     public class ClienteController : Controller
     {
         private readonly IClienteRepository _clienteRepository;
