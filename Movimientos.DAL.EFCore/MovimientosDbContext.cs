@@ -21,7 +21,7 @@ public class MovimientosDbContext : DbContext
         modelBuilder.Entity<Cliente>().HasData(new Cliente
         {
             Id = guid,
-            Contraseña = "123456789",
+            Contraseña = "$2a$11$uX4vWzAkf2QWHjs8e1n71eYWRzwntTW6pKQ26KyW5tYbzRFcCkWVm",
             Nombre = "Gustavo Gavancho León",
             Telefono = 946585141,
             Edad = 27,
@@ -42,19 +42,7 @@ public class MovimientosDbContext : DbContext
             Estado = true,
             FechaCreacion = DateTime.Now,
             FechaModificacion = DateTime.Now,
-            ClienteId = guid,
-            //Cliente = new Cliente 
-            //{
-            //    Id = guid,
-            //    Contraseña = "123456789",
-            //    Nombre = "Gustavo Gavancho León",
-            //    Telefono = 946585141,
-            //    Edad = 27,
-            //    Identificacion = 73215945,
-            //    Direccion = "Psje. Limatambo 121, Tarapoto, San Martín, San Martín, Perú",
-            //    Genero = Genero.Masculino,
-            //    Estado = true
-            //}
+            ClienteId = guid
         });
     }
 }

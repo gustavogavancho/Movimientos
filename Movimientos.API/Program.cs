@@ -5,16 +5,23 @@ using Movimientos.BIZ.Services.Interfaces;
 using Movimientos.DAL.EFCore;
 using Movimientos.DAL.EFCore.Repository;
 using Movimientos.DAL.EFCore.Repository.Interfaces;
+using Movimientos.DAL.EFCore.Triggers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<MovimientosDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite")));
+builder.Services.AddDbContext<MovimientosDbContext>(options => 
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("sqlite"));
+    options.UseTriggers(triggerOptions => 
+    {
+        triggerOptions.AddTrigger<BeforeSaveClienteTrigger>();
+    });
+});
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IMovimientoRepository, MovimientoRepository>();
 builder.Services.AddScoped<ICuentaRepository, CuentaRepository>();
 builder.Services.AddScoped<IMovimientoService, MovimientoService>();
-builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
