@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Movimientos.DAL.EFCore;
@@ -12,53 +11,49 @@ using Movimientos.DAL.EFCore;
 namespace Movimientos.DAL.EFCore.Migrations
 {
     [DbContext(typeof(MovimientosDbContext))]
-    [Migration("20220331044418_Init")]
+    [Migration("20220402202201_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
 
             modelBuilder.Entity("Movimientos.COMMON.Models.Cliente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Contraseña")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<short>("Edad")
-                        .HasColumnType("smallint");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("FechaModificacion")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<short>("Genero")
-                        .HasColumnType("smallint");
+                        .HasColumnType("INTEGER");
 
                     b.Property<long>("Identificacion")
-                        .HasColumnType("bigint");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<long>("Telefono")
-                        .HasColumnType("bigint");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -67,13 +62,13 @@ namespace Movimientos.DAL.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9f807360-1cdb-40b9-a797-8a0ae3d2bf59"),
+                            Id = new Guid("6e381eb3-b59a-4354-bdf5-d05829cc3bfe"),
                             Contraseña = "123456789",
                             Direccion = "Psje. Limatambo 121, Tarapoto, San Martín, San Martín, Perú",
                             Edad = (short)27,
                             Estado = true,
-                            FechaCreacion = new DateTime(2022, 3, 30, 23, 44, 18, 25, DateTimeKind.Local).AddTicks(5190),
-                            FechaModificacion = new DateTime(2022, 3, 30, 23, 44, 18, 25, DateTimeKind.Local).AddTicks(5198),
+                            FechaCreacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4095),
+                            FechaModificacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4096),
                             Genero = (short)1,
                             Identificacion = 73215945L,
                             Nombre = "Gustavo Gavancho León",
@@ -85,28 +80,28 @@ namespace Movimientos.DAL.EFCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("ClienteId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("FechaModificacion")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<long>("NumeroCuenta")
-                        .HasColumnType("bigint");
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("SaldoInicial")
-                        .HasColumnType("decimal(14,2)");
+                        .HasColumnType("decimal(14, 2)");
 
                     b.Property<short>("Tipo")
-                        .HasColumnType("smallint");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -117,11 +112,11 @@ namespace Movimientos.DAL.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3d8f4fe0-1c67-487e-8b49-7f8951cadc39"),
-                            ClienteId = new Guid("9f807360-1cdb-40b9-a797-8a0ae3d2bf59"),
+                            Id = new Guid("0bb27fe1-5fe2-4769-bf2f-94f052dad382"),
+                            ClienteId = new Guid("6e381eb3-b59a-4354-bdf5-d05829cc3bfe"),
                             Estado = true,
-                            FechaCreacion = new DateTime(2022, 3, 30, 23, 44, 18, 25, DateTimeKind.Local).AddTicks(5295),
-                            FechaModificacion = new DateTime(2022, 3, 30, 23, 44, 18, 25, DateTimeKind.Local).AddTicks(5295),
+                            FechaCreacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4219),
+                            FechaModificacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4220),
                             NumeroCuenta = 130195L,
                             SaldoInicial = 2000m,
                             Tipo = (short)1
@@ -132,28 +127,28 @@ namespace Movimientos.DAL.EFCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("CuentaId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("FechaModificacion")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("Saldo")
-                        .HasColumnType("decimal(14,2)");
+                        .HasColumnType("TEXT");
 
                     b.Property<short>("Tipo")
-                        .HasColumnType("smallint");
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(14,2)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

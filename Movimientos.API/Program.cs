@@ -9,7 +9,7 @@ using Movimientos.DAL.EFCore.Repository.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<MovimientosDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<MovimientosDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("sqlite")));
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IMovimientoRepository, MovimientoRepository>();
 builder.Services.AddScoped<ICuentaRepository, CuentaRepository>();

@@ -2,20 +2,15 @@
 
 public class CuentaInexistenteException : Exception
 {
-    public Guid GuidCuenta { get; set; }
-
-    public CuentaInexistenteException(Guid guidCuenta)
+    public CuentaInexistenteException()
     {
-        GuidCuenta = guidCuenta;
     }
 
-    public CuentaInexistenteException(Guid guidCuenta, string message) : base(message)
+    public CuentaInexistenteException(string message) : base(message)
     {
-        GuidCuenta = guidCuenta;
     }
 
-    public CuentaInexistenteException(Guid guidCuenta, string message, Exception innerException) : base(message, innerException)
+    public CuentaInexistenteException(string message, Exception innerException) : base(message, innerException)
     {
-        GuidCuenta = guidCuenta;
     }
 }

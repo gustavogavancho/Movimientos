@@ -17,7 +17,8 @@ public class CuentaRepository : GenericRepository<Cuenta>, ICuentaRepository
     {
         Cuenta entity = await _context.Cuenta
             .Include(x => x.Movimientos)
-            .SingleOrDefaultAsync(x => x.ClienteId == clienteId && (x.FechaCreacion.Date >= fechaInicio.Date));
+            .SingleOrDefaultAsync(x => x.ClienteId == clienteId && 
+            (x.Movimientos.Any(y=> y.FechaCreacion.Date >= fechaInicio.Date && y.FechaCreacion.Date <= fechaFin.Date)));
 
         return entity;
     }

@@ -21,14 +21,17 @@ public class MovimientoService : IMovimientoService
     {
         entity.Id = Guid.NewGuid();
         var sumaRetiroDiario = await _movimientoRepository.SumaRetiroDiario(entity.CuentaId);
-        if (sumaRetiroDiario + entity.Valor < -1000)
+        if (entity.Valor < 0 && sumaRetiroDiario - entity.Valor < 1000)
             throw new LimiteRetiroDiarioException(entity.Valor, sumaRetiroDiario);
 
         var cuentaAsociada = await _cuentaRepository.Get(entity.CuentaId);
         if (cuentaAsociada is null)
-            throw new CuentaInexistenteException(entity.CuentaId);
+            throw new CuentaInexistenteException();
 
-        if (cuentaAsociada.SaldoInicial < entity.Valor)
+        if (cuentaAsociada.Tipo != entity.Tipo)
+            throw new TipoCuentaIncorrectaException(entity.Tipo);
+
+        if (entity.Valor < 0 && cuentaAsociada.SaldoInicial < -entity.Valor)
             throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.SaldoInicial);
         else
         {
@@ -39,5 +42,50 @@ public class MovimientoService : IMovimientoService
         Movimiento createdResult = await _movimientoRepository.Create(entity);
 
         return createdResult;
+    }
+
+    public async Task<Movimiento> UpdateMovimiento(Movimiento entity)
+    {
+        var movimientoAnterior = await _movimientoRepository.Get(entity.Id);
+
+        var sumaRetiroDiario = await _movimientoRepository.SumaRetiroDiario(entity.CuentaId);
+        if (sumaRetiroDiario - movimientoAnterior.Valor + entity.Valor < -1000)
+            throw new LimiteRetiroDiarioException(entity.Valor, sumaRetiroDiario);
+
+        var cuentaAsociada = await _cuentaRepository.Get(entity.CuentaId);
+        if (cuentaAsociada is null)
+            throw new CuentaInexistenteException();
+
+        if (cuentaAsociada.SaldoInicial + movimientoAnterior.Valor < entity.Valor)
+            throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.SaldoInicial);
+        else
+        {
+            entity.Saldo = cuentaAsociada.SaldoInicial = cuentaAsociada.SaldoInicial + entity.Valor + movimientoAnterior.Valor;
+            await _cuentaRepository.Attach(cuentaAsociada);
+        }
+
+        Movimiento createdResult = await _movimientoRepository.Update(entity.Id, entity);
+
+        return createdResult;
+    }
+
+    public async Task<bool> DeleteMovimiento(Guid id)
+    {
+        Movimiento entity = await _movimientoRepository.Get(id);
+
+        if (entity is null)
+            throw new MovimientoInexistenteExecption();
+
+        Cuenta cuenta = await _cuentaRepository.Get(entity.CuentaId);
+
+        if (cuenta is null)
+            throw new CuentaInexistenteException();
+
+        cuenta.SaldoInicial -= entity.Valor;
+        await _cuentaRepository.Attach(cuenta);
+        
+        var success = await _movimientoRepository.Delete(id);
+
+        return success;
     }
 }
