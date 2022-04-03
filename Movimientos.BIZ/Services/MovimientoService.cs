@@ -21,7 +21,7 @@ public class MovimientoService : IMovimientoService
     {
         entity.Id = Guid.NewGuid();
         var sumaRetiroDiario = await _movimientoRepository.SumaRetiroDiario(entity.CuentaId);
-        if (entity.Valor < 0 && sumaRetiroDiario - entity.Valor < 1000)
+        if (entity.Valor < 0 && sumaRetiroDiario - entity.Valor > 1000)
             throw new LimiteRetiroDiarioException(entity.Valor, sumaRetiroDiario);
 
         var cuentaAsociada = await _cuentaRepository.Get(entity.CuentaId);
@@ -31,11 +31,11 @@ public class MovimientoService : IMovimientoService
         if (cuentaAsociada.Tipo != entity.Tipo)
             throw new TipoCuentaIncorrectaException(entity.Tipo);
 
-        if (entity.Valor < 0 && cuentaAsociada.SaldoInicial < -entity.Valor)
-            throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.SaldoInicial);
+        if (entity.Valor < 0 && cuentaAsociada.Saldo < -entity.Valor)
+            throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.Saldo);
         else
         {
-            entity.Saldo = cuentaAsociada.SaldoInicial = cuentaAsociada.SaldoInicial + entity.Valor;
+            entity.Saldo = cuentaAsociada.Saldo = cuentaAsociada.Saldo + entity.Valor;
             await _cuentaRepository.Attach(cuentaAsociada);
         }
 
@@ -56,11 +56,11 @@ public class MovimientoService : IMovimientoService
         if (cuentaAsociada is null)
             throw new CuentaInexistenteException();
 
-        if (cuentaAsociada.SaldoInicial + movimientoAnterior.Valor < entity.Valor)
-            throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.SaldoInicial);
+        if (cuentaAsociada.Saldo + movimientoAnterior.Valor < entity.Valor)
+            throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.Saldo);
         else
         {
-            entity.Saldo = cuentaAsociada.SaldoInicial = cuentaAsociada.SaldoInicial + entity.Valor + movimientoAnterior.Valor;
+            entity.Saldo = cuentaAsociada.Saldo = cuentaAsociada.Saldo + entity.Valor + movimientoAnterior.Valor;
             await _cuentaRepository.Attach(cuentaAsociada);
         }
 
@@ -81,7 +81,7 @@ public class MovimientoService : IMovimientoService
         if (cuenta is null)
             throw new CuentaInexistenteException();
 
-        cuenta.SaldoInicial -= entity.Valor;
+        cuenta.Saldo -= entity.Valor;
         await _cuentaRepository.Attach(cuenta);
         
         var success = await _movimientoRepository.Delete(id);

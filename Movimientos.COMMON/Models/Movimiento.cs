@@ -7,6 +7,7 @@ public class Movimiento : BaseEntity
 {
     public Tipo Tipo { get; set; }
     public decimal Valor { get; set; }
+    public decimal SaldoInicial { get; set; }
     public decimal Saldo { get; set; }
     public bool Estado { get; set; }
     public Guid CuentaId { get; set; }

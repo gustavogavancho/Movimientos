@@ -16,33 +16,37 @@ public class MovimientosDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        var guid = Guid.NewGuid();
+        modelBuilder.Entity<Movimiento>()
+            .Property(e => e.Valor)
+            .HasConversion<double>();
 
-        modelBuilder.Entity<Cliente>().HasData(new Cliente
-        {
-            Id = guid,
-            Contraseña = "$2a$11$uX4vWzAkf2QWHjs8e1n71eYWRzwntTW6pKQ26KyW5tYbzRFcCkWVm",
-            Nombre = "Gustavo Gavancho León",
-            Telefono = 946585141,
-            Edad = 27,
-            Identificacion = 73215945,
-            Direccion = "Psje. Limatambo 121, Tarapoto, San Martín, San Martín, Perú",
-            Genero = Genero.Masculino,
-            Estado = true,
-            FechaCreacion = DateTime.Now,
-            FechaModificacion = DateTime.Now
-        });
+        //var guid = Guid.NewGuid();
 
-        modelBuilder.Entity<Cuenta>().HasData(new Cuenta
-        {
-            Id = Guid.NewGuid(),
-            NumeroCuenta = 130195,
-            Tipo = Tipo.Ahorro,
-            SaldoInicial = 2000,
-            Estado = true,
-            FechaCreacion = DateTime.Now,
-            FechaModificacion = DateTime.Now,
-            ClienteId = guid
-        });
+        //modelBuilder.Entity<Cliente>().HasData(new Cliente
+        //{
+        //    Id = guid,
+        //    Contraseña = "$2a$11$uX4vWzAkf2QWHjs8e1n71eYWRzwntTW6pKQ26KyW5tYbzRFcCkWVm",
+        //    Nombre = "Gustavo Gavancho León",
+        //    Telefono = 946585141,
+        //    Edad = 27,
+        //    Identificacion = 73215945,
+        //    Direccion = "Psje. Limatambo 121, Tarapoto, San Martín, San Martín, Perú",
+        //    Genero = Genero.Masculino,
+        //    Estado = true,
+        //    FechaCreacion = DateTime.Now,
+        //    FechaModificacion = DateTime.Now
+        //});
+
+        //modelBuilder.Entity<Cuenta>().HasData(new Cuenta
+        //{
+        //    Id = Guid.NewGuid(),
+        //    NumeroCuenta = 130195,
+        //    Tipo = Tipo.Ahorro,
+        //    SaldoInicial = 2000,
+        //    Estado = true,
+        //    FechaCreacion = DateTime.Now,
+        //    FechaModificacion = DateTime.Now,
+        //    ClienteId = guid
+        //});
     }
 }

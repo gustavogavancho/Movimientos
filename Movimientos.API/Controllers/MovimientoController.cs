@@ -63,7 +63,7 @@ namespace Movimientos.API.Controllers
             {
                 return BadRequest("Saldo no disponible.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest();
             }

@@ -78,16 +78,6 @@ namespace Movimientos.DAL.EFCore.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Cliente",
-                columns: new[] { "Id", "Contraseña", "Direccion", "Edad", "Estado", "FechaCreacion", "FechaModificacion", "Genero", "Identificacion", "Nombre", "Telefono" },
-                values: new object[] { new Guid("6e381eb3-b59a-4354-bdf5-d05829cc3bfe"), "123456789", "Psje. Limatambo 121, Tarapoto, San Martín, San Martín, Perú", (short)27, true, new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4095), new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4096), (short)1, 73215945L, "Gustavo Gavancho León", 946585141L });
-
-            migrationBuilder.InsertData(
-                table: "Cuenta",
-                columns: new[] { "Id", "ClienteId", "Estado", "FechaCreacion", "FechaModificacion", "NumeroCuenta", "SaldoInicial", "Tipo" },
-                values: new object[] { new Guid("0bb27fe1-5fe2-4769-bf2f-94f052dad382"), new Guid("6e381eb3-b59a-4354-bdf5-d05829cc3bfe"), true, new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4219), new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4220), 130195L, 2000m, (short)1 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Cuenta_ClienteId",
                 table: "Cuenta",

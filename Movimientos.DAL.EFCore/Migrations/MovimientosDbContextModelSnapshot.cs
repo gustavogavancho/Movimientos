@@ -56,22 +56,6 @@ namespace Movimientos.DAL.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cliente");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6e381eb3-b59a-4354-bdf5-d05829cc3bfe"),
-                            Contraseña = "123456789",
-                            Direccion = "Psje. Limatambo 121, Tarapoto, San Martín, San Martín, Perú",
-                            Edad = (short)27,
-                            Estado = true,
-                            FechaCreacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4095),
-                            FechaModificacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4096),
-                            Genero = (short)1,
-                            Identificacion = 73215945L,
-                            Nombre = "Gustavo Gavancho León",
-                            Telefono = 946585141L
-                        });
                 });
 
             modelBuilder.Entity("Movimientos.COMMON.Models.Cuenta", b =>
@@ -106,19 +90,6 @@ namespace Movimientos.DAL.EFCore.Migrations
                     b.HasIndex("ClienteId");
 
                     b.ToTable("Cuenta");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0bb27fe1-5fe2-4769-bf2f-94f052dad382"),
-                            ClienteId = new Guid("6e381eb3-b59a-4354-bdf5-d05829cc3bfe"),
-                            Estado = true,
-                            FechaCreacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4219),
-                            FechaModificacion = new DateTime(2022, 4, 2, 15, 22, 1, 454, DateTimeKind.Local).AddTicks(4220),
-                            NumeroCuenta = 130195L,
-                            SaldoInicial = 2000m,
-                            Tipo = (short)1
-                        });
                 });
 
             modelBuilder.Entity("Movimientos.COMMON.Models.Movimiento", b =>
