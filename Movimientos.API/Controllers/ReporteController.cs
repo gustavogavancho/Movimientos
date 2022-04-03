@@ -20,7 +20,27 @@ namespace Movimientos.API.Controllers
         {
             var estadoCuenta = await _cuentaRepository.GetEstadoCuenta(clienteId, fechaInicio, fechaFin);
 
-            return Ok(estadoCuenta);
+            List<ReporteModel> reporte = new();
+
+            foreach (var estado in estadoCuenta)
+            {
+                foreach (var movimiento in estado.Movimientos)
+                {
+                    reporte.Add(new ReporteModel
+                    {
+                        Fecha = movimiento.FechaCreacion,
+                        Cliente = estado.Cliente.Nombre,
+                        NumeroCuenta = estado.NumeroCuenta,
+                        Tipo = estado.Tipo,
+                        SaldoInicial = movimiento.SaldoInicial,
+                        Estado = movimiento.Estado,
+                        Movimiento = movimiento.Valor,
+                        SaldoDisponible = movimiento.Saldo,
+                    });
+                }
+            }
+
+            return Ok(reporte);
         }
     }
 }

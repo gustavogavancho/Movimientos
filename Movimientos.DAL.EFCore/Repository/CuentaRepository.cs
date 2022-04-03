@@ -13,12 +13,13 @@ public class CuentaRepository : GenericRepository<Cuenta>, ICuentaRepository
         _context = context;
     }
 
-    public async Task<Cuenta> GetEstadoCuenta(Guid clienteId, DateTime fechaInicio, DateTime fechaFin)
+    public async Task<IEnumerable<Cuenta>> GetEstadoCuenta(Guid clienteId, DateTime fechaInicio, DateTime fechaFin)
     {
-        Cuenta entity = await _context.Cuenta
+        IEnumerable<Cuenta> entity = await _context.Cuenta
             .Include(x => x.Movimientos)
-            .SingleOrDefaultAsync(x => x.ClienteId == clienteId && 
-            (x.Movimientos.Any(y=> y.FechaCreacion.Date >= fechaInicio.Date && y.FechaCreacion.Date <= fechaFin.Date)));
+            .Include(x=> x.Cliente)
+            .Where(x => x.ClienteId == clienteId && 
+            (x.Movimientos.Any(y=> y.FechaCreacion.Date >= fechaInicio.Date && y.FechaCreacion.Date <= fechaFin.Date))).ToListAsync();
 
         return entity;
     }

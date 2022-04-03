@@ -35,6 +35,7 @@ public class MovimientoService : IMovimientoService
             throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.Saldo);
         else
         {
+            entity.SaldoInicial = cuentaAsociada.Saldo;
             entity.Saldo = cuentaAsociada.Saldo = cuentaAsociada.Saldo + entity.Valor;
             await _cuentaRepository.Attach(cuentaAsociada);
         }
@@ -60,6 +61,7 @@ public class MovimientoService : IMovimientoService
             throw new SaldoInsuficienteException(entity.Valor, cuentaAsociada.Saldo);
         else
         {
+            entity.SaldoInicial = cuentaAsociada.Saldo;
             entity.Saldo = cuentaAsociada.Saldo = cuentaAsociada.Saldo + entity.Valor + movimientoAnterior.Valor;
             await _cuentaRepository.Attach(cuentaAsociada);
         }

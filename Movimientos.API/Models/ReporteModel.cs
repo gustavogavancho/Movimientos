@@ -1,8 +1,15 @@
-﻿namespace Movimientos.API.Models;
+﻿using Movimientos.COMMON.Enums;
+
+namespace Movimientos.API.Models;
 
 public class ReporteModel
 {
-    public Guid ClienteId { get; set; }
-    public DateTime FechaInicio { get; set; }
-    public DateTime FechaFin { get; set; }
+    public DateTime Fecha { get; set; }
+    public string Cliente { get; set; }
+    public long NumeroCuenta { get; set; }
+    public Tipo Tipo { get; set; }
+    public decimal SaldoInicial { get; set; }
+    public bool Estado { get; set; }
+    public decimal Movimiento { get; set; }
+    public decimal SaldoDisponible { get; set; }
 }
